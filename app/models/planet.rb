@@ -1,3 +1,3 @@
 class Planet < ApplicationRecord
-    has_many :planet_info
+    has_many :planet_infos, dependent: :destroy
 end

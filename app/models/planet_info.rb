@@ -1,3 +1,3 @@
 class PlanetInfo < ApplicationRecord
-  belongs_to :planets
+  belongs_to :planet
 end

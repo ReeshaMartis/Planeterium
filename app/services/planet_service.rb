@@ -8,14 +8,14 @@ class PlanetService
         end
     end
 
-    def create
+    def create(params)
         planet_param = params.require(:planet).permit(:name,:position)
         if Planet.exists?(name: planet_param[:name])
             return "Planet already exists"
         else
             planet = Planet.new(planet_param)
 
-            if Planet.savein
+            if planet.save
                 planet
             else
                 "Error in creating this planet"
@@ -23,7 +23,7 @@ class PlanetService
         end
     end
 
-    def create_bulk
+    def create_bulk(params)
         res =[]
         planets_data = params.require(:planet)
         planets_data.each do |planet_param|
@@ -41,10 +41,10 @@ class PlanetService
         res
     end
 
-    def update
-        planet_param = params.require(:planet).permit(:name,:position)
-        upd_planet = Planet.find_by(name: planet_param[:name])
+    def update(params)
+        upd_planet = Planet.find_by(id: params[:id])
         if upd_planet
+            planet_param = params.require(:planet).permit(:name,:position)
             upd_planet.update(planet_param)
             upd_planet
         else
@@ -52,9 +52,8 @@ class PlanetService
         end
     end
 
-    def delete
-        planet_param = params.require(:planet).permit(:name,:position)
-        del_planet = Planet.find_by(name: planet_para[:name])
+    def delete(params)
+        del_planet = Planet.find_by(id: params[:id])
         if del_planet
             del_planet.destroy
         else

@@ -16,10 +16,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_13_213749) do
 
   create_table "planet_infos", force: :cascade do |t|
     t.text "information"
-    t.bigint "planets_id", null: false
+    t.bigint "planet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["planets_id"], name: "index_planet_infos_on_planets_id"
+    t.index ["planet_id"], name: "index_planet_infos_on_planet_id"
   end
 
   create_table "planets", force: :cascade do |t|
@@ -29,5 +29,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_13_213749) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "planet_infos", "planets", column: "planets_id"
+  add_foreign_key "planet_infos", "planets"
 end
