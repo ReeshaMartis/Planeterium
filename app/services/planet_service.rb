@@ -8,6 +8,15 @@ class PlanetService
         end
     end
 
+    def show(id)
+        planet = Planet.find_by(id: id)
+        if planet.present?
+            planet
+        else
+            "No information available"
+        end
+    end
+
     def create(params)
         planet_param = params.require(:planet).permit(:name,:position)
         if Planet.exists?(name: planet_param[:name])

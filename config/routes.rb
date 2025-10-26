@@ -5,10 +5,26 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  resources :planets do
+    :planet_infos
+  end
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+
 end
+
+
+## Planets CRUD
+# get    '/planets',          to: 'planets#index'    # list all planets
+# post   '/planets',          to: 'planets#create'   # create a new planet
+# get    '/planets/:id',      to: 'planets#show'     # show a specific planet
+# patch  '/planets/:id',      to: 'planets#update'   # update a planet
+# put    '/planets/:id',      to: 'planets#update'   # update (alternative)
+# delete '/planets/:id',      to: 'planets#destroy'  # delete a planet
+
+# # PlanetInfos CRUD (nested under planets)
+# get    '/planets/:planet_id/planet_infos',          to: 'planet_infos#index'
+# post   '/planets/:planet_id/planet_infos',          to: 'planet_infos#create'
+# get    '/planets/:planet_id/planet_infos/:id',      to: 'planet_infos#show'
+# patch  '/planets/:planet_id/planet_infos/:id',      to: 'planet_infos#update'
+# put    '/planets/:planet_id/planet_infos/:id',      to: 'planet_infos#update'
+# delete '/planets/:planet_id/planet_infos/:id',      to: 'planet_infos#destroy'
